@@ -76,11 +76,5 @@ namespace :puma do
         execute command
       end
     end
-
-    def sudo_command(str)
-      ask(:password, "pwd", echo: false)
-      execute "echo #{fetch(:password)} | sudo -S  " + str
-    end
-
   end
 end

@@ -194,4 +194,8 @@ namespace :puma do
     after 'deploy:finished', 'puma:smart_restart'
   end
 
+  def sudo_command(str)
+    ask(:password, "pwd", echo: false)
+    execute "echo #{fetch(:password)} | sudo -S  " + str
+  end
 end
