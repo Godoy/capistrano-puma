@@ -71,10 +71,15 @@ namespace :puma do
 
     def sudo_if_needed(command)
       if fetch(:puma_monit_use_sudo)
-        sudo command
+        sudo_command command
       else
         execute command
       end
+    end
+
+    def sudo_command(str)
+      ask(:password, "pwd", echo: false)
+      execute "echo #{fetch(:password)} | sudo -S  " + str
     end
 
   end
